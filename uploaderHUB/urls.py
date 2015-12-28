@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from filerHub_api import views
+
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
-    url(r'^index/', include('filerHub.urls')),
-    url(r'^files/', include('filerHub_api.urls')),
+    url(r'^admin/$', include(admin.site.urls)),
+    url(r'^index/$', include('filerHub.urls')),
+    url(r'^files/$', views.FileUploadView.as_view()),
 ]

@@ -22,7 +22,7 @@ class FileUploadView(views.APIView):
    def get(self, request, format=None):
       if request.method == 'HEAD':
          dic_headers = {}
-         dic_headers['Location'] = 'http://172.17.42.1:8001/files'
+         dic_headers['Location'] = 'http://192.168.56.1:8000/files/'
          return Response(status=204, content_type='multipart/form-data', headers=dic_headers)
 
       uploaded_files = FileUpload.objects.all()
@@ -39,12 +39,12 @@ class FileUploadView(views.APIView):
         return Response(status=201)
 
    def post(self, request, format=None):
-        a_file = request.FILES['data']
+        a_file = request.FILES.getlist('xml_submission_file')[0]
         handle_uploaded_file(a_file)
-        dic_headers = {}
-        dic_headers['Location'] = 'http://172.17.42.1:8001/files' + a_file._name
-        return Response(status=301, headers=dic_headers)
-        #return Response("File(s) uploaded!", status=204)
+        #dic_headers = {}
+        #dic_headers['Location'] = 'http://192.168.56.1:8000/files' + a_file._name
+        #return Response(status=201)
+        return Response("File(s) uploaded!", status=201)
 
 
 def handle_uploaded_file(file):
