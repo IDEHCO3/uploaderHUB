@@ -5,9 +5,20 @@ from rest_framework import views
 from rest_framework.parsers import FileUploadParser, MultiPartParser
 from rest_framework.response import Response
 
-from filerHub_api.models import FileUpload
-from filerHub_api.serializers import FileUploadSerializer
+from filerHub_api.models import ProjectCollector
+from filerHub_api.serializers import ProjectCollectorSerializer
 from uploaderHUB import settings
+from rest_framework import generics
+
+
+
+class ProjectCollectorList(generics.ListCreateAPIView):
+    queryset = ProjectCollector.objects.all()
+    serializer_class = ProjectCollectorSerializer
+
+class ProjectCollectorDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProjectCollector.objects.all()
+    serializer_class = ProjectCollectorSerializer
 
 
 class FileUploadView(views.APIView):
@@ -39,7 +50,8 @@ class FileUploadView(views.APIView):
         return Response(status=201)
 
    def post(self, request, format=None):
-        a_file = request.FILES.getlist('xml_submission_file')[0]
+        #a_file = request.FILES.getlist('xml_submission_file')[0]
+        a_file = request.FILES.getlist('files')[0]
         handle_uploaded_file(a_file)
         #dic_headers = {}
         #dic_headers['Location'] = 'http://192.168.56.1:8000/files' + a_file._name

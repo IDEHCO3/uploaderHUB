@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <h:head>
+    <h:title>marco_geodesico</h:title>
+    <model>
+      <instance>
+        <marco_geodesico id="marco_geodesico">
+          <start/>
+          <end/>
+          <deviceid/>
+          <estado_marco_geodesico/>
+          <foto/>
+          <geopoint/>
+          <meta>
+            <instanceID/>
+          </meta>
+        </marco_geodesico>
+      </instance>
+      <bind jr:preload="timestamp" jr:preloadParams="start" nodeset="/marco_geodesico/start" type="dateTime"/>
+      <bind jr:preload="timestamp" jr:preloadParams="end" nodeset="/marco_geodesico/end" type="dateTime"/>
+      <bind jr:preload="property" jr:preloadParams="deviceid" nodeset="/marco_geodesico/deviceid" type="string"/>
+      <bind nodeset="/marco_geodesico/estado_marco_geodesico" type="select1"/>
+      <bind nodeset="/marco_geodesico/foto" type="binary"/>
+      <bind nodeset="/marco_geodesico/geopoint" type="geopoint"/>
+      <bind calculate="concat('uuid:', uuid())" nodeset="/marco_geodesico/meta/instanceID" readonly="true()" type="string"/>
+    </model>
+  </h:head>
+  <h:body>
+    <select1 ref="/marco_geodesico/estado_marco_geodesico">
+      <label>Qual o estado do marco geodésico?</label>
+      <item>
+        <label>Bom</label>
+        <value>bom</value>
+      </item>
+      <item>
+        <label>Regular</label>
+        <value>regular</value>
+      </item>
+      <item>
+        <label>Danificado</label>
+        <value>danificado</value>
+      </item>
+      <item>
+        <label>Inexistente</label>
+        <value>inexistente</value>
+      </item>
+    </select1>
+    <upload mediatype="image/*" ref="/marco_geodesico/foto">
+      <label>Tire uma foto.</label>
+    </upload>
+    <input ref="/marco_geodesico/geopoint">
+      <label>Colete a posição do marco geodésico.</label>
+      <hint>GPS coordinates can only be collected when outside.</hint>
+    </input>
+  </h:body>
+</h:html>

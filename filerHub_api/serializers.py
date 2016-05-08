@@ -1,13 +1,13 @@
 # serializers.py
 from rest_framework import serializers
-from .models import FileUpload
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
-class FileUploadSerializer(serializers.HyperlinkedModelSerializer):
-    owner = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field='id'
-    )
+from filerHub_api.models import ProjectCollector
 
+
+class ProjectCollectorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = FileUpload
-        read_only_fields = ('created', 'datafile', 'owner')
+        model = ProjectCollector
+        fields = ['id', 'name', 'date_created' ]
+
+

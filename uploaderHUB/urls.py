@@ -19,7 +19,6 @@ from django.contrib import admin
 from filerHub_api import views
 
 urlpatterns = [
-    url(r'^admin/$', include(admin.site.urls)),
-    url(r'^index/$', include('filerHub.urls')),
-    url(r'^files/$', views.FileUploadView.as_view()),
+    #url(r'^admin/$', include(admin.site.urls)),
+    url(r'^', include('filerHub_api.urls', namespace='uploader_hub')),
 ]

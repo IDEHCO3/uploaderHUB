@@ -39,11 +39,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
-    'corsheaders',
+    #'corsheaders',
     'rest_framework',
     'rest_framework_jwt',
     'rest_framework_gis',
-    'filerHub',
     'filerHub_api',
 
 )
@@ -101,9 +100,9 @@ DATABASES = {
     'default': {
          'ENGINE': 'django.contrib.gis.db.backends.postgis',
          'HOST': 'localhost',
-         'NAME': 'idehco3',
-         'USER': 'idehco3',
-         'PASSWORD': 'idehco3'
+         'NAME': 'postgres',
+         'USER': 'postgres',
+         'PASSWORD': 'desenv'
      }
 
 }
